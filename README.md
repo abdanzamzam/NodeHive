@@ -1,2 +1,2 @@
-# NodeHive
-NodeHive Framework
+# NodeHive Framework
+The Node.js JavaScript Framework
