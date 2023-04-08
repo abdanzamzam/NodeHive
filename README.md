@@ -1,2 +1,2 @@
-# NodeHive JavaScript Framework (Node.js)
-The Node.js JavaScript Framework based on express.js.
+# NodeHive Framework
+The JavaScript Framework (node.js) based on expressjs.
