@@ -1,4 +1,5 @@
-const { Biodata } = require("../models");
+/* eslint-disable no-useless-catch */
+const { Biodata } = require('../models')
 
 exports.createOne = async (
   { userId, name, numberPhone, photo },
@@ -8,9 +9,9 @@ exports.createOne = async (
     const result = await Biodata.create(
       { userId, name, numberPhone, photo },
       { transaction }
-    );
-    return result;
+    )
+    return result
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}

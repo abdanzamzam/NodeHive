@@ -1,15 +1,16 @@
-const { Role } = require("../models");
+/* eslint-disable no-useless-catch */
+const { Role } = require('../models')
 
 exports.getOneByRole = async ({ role }) => {
   try {
     const result = await Role.findOne({
-      where: { name: role },
-    });
+      where: { name: role }
+    })
     if (!result) {
-      throw new Error("Role not found");
+      throw new Error('Role not found')
     }
-    return result;
+    return result
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}

@@ -1,7 +1,7 @@
-const user = require("express").Router();
+const user = require('express').Router()
 
-user.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
+user.get('/', function (req, res, next) {
+  res.send('respond with a resource')
+})
 
-module.exports = user;
+module.exports = user

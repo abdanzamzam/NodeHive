@@ -1,75 +1,75 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
 const verifyToken = async (req, res, next) => {
-  let token = await req.headers["x-access-token"];
+  const token = await req.headers['x-access-token']
 
   if (!token) {
     return res.status(403).send({
-      status: "FORBIDDEN",
+      status: 'FORBIDDEN',
       code: 403,
-      message: "Token in empty!",
-      data: [],
-    });
+      message: 'Token in empty!',
+      data: []
+    })
   }
 
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        status: "UNAUTHORIZED",
+        status: 'UNAUTHORIZED',
         code: 401,
-        message: "Token invalid!",
-        data: [],
-      });
+        message: 'Token invalid!',
+        data: []
+      })
     }
-    req.userId = decoded.id;
-    next();
-  });
-};
+    req.userId = decoded.id
+    next()
+  })
+}
 
 const isAdmin = async (req, res, next) => {
-  let accessAllowed = ["admin"];
-  let accessRole = await checkAccessRole(req.userId, accessAllowed);
+  const accessAllowed = ['admin']
+  const accessRole = await checkAccessRole(req.userId, accessAllowed)
 
   if (accessRole) {
-    next();
+    next()
   } else {
     res.status(401).send({
-      message: "Tidak memiliki akses admin!",
-    });
+      message: 'Tidak memiliki akses admin!'
+    })
   }
-};
+}
 
 const isRoot = async (req, res, next) => {
-  let accessAllowed = ["root"];
-  let accessRole = await checkAccessRole(req.userId, accessAllowed);
+  const accessAllowed = ['root']
+  const accessRole = await checkAccessRole(req.userId, accessAllowed)
 
   if (accessRole) {
-    next();
+    next()
   } else {
     res.status(401).send({
-      message: "Tidak memiliki akses root!",
-    });
+      message: 'Tidak memiliki akses root!'
+    })
   }
-};
+}
 
 const isRootOrAdmin = async (req, res, next) => {
-  let accessAllowed = ["admin", "root"];
-  let accessRole = await checkAccessRole(req.userId, accessAllowed);
+  const accessAllowed = ['admin', 'root']
+  const accessRole = await checkAccessRole(req.userId, accessAllowed)
 
   if (accessRole) {
-    next();
+    next()
   } else {
     res.status(401).send({
-      message: "Tidak memiliki akses admin/ root!",
-    });
+      message: 'Tidak memiliki akses admin/ root!'
+    })
   }
-};
+}
 
 const authJwt = {
   verifyToken,
   isAdmin,
   isRoot,
-  isRootOrAdmin,
-};
+  isRootOrAdmin
+}
 
-module.exports = authJwt;
+module.exports = authJwt

@@ -1,23 +1,24 @@
-const { UserRole } = require("../models");
+/* eslint-disable no-useless-catch */
+const { UserRole, Role } = require('../models')
 
 exports.createOne = async ({ roleId, userId }, transaction) => {
   try {
-    const result = await UserRole.create({ roleId, userId }, { transaction });
-    return result;
+    const result = await UserRole.create({ roleId, userId }, { transaction })
+    return result
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
 exports.getOneJoinRole = async (id) => {
   try {
     const result = await UserRole.findOne({
       where: { id },
-      include: [{ model: Role }],
-    });
+      include: [{ model: Role }]
+    })
 
-    return result;
+    return result
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
